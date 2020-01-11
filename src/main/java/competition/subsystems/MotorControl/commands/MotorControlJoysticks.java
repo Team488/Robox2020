@@ -1,4 +1,4 @@
-package competition.subsystems.MotorControl.commands;
+package competition.subsystems.motorcontrol.commands;
 
 import com.google.inject.Inject;
 

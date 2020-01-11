@@ -1,4 +1,4 @@
-package competition.subsystems.MotorControl;
+package competition.subsystems.motorcontrol;
 
 import xbot.common.command.BaseSubsystem;
 import xbot.common.controls.actuators.XCANTalon;
