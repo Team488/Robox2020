@@ -1,5 +1,7 @@
 package competition.subsystems.motorcontrol;
 
+import com.google.inject.Inject;
+
 import xbot.common.command.BaseSubsystem;
 import xbot.common.controls.actuators.XCANTalon;
 import xbot.common.injection.wpi_factories.CommonLibFactory;
@@ -9,6 +11,7 @@ public class MotorControl32SubSystem extends BaseSubsystem
 {
     public final XCANTalon motor32;
 
+    @Inject
     public MotorControl32SubSystem(CommonLibFactory factory, XPropertyManager prop)
     {
         this.motor32 = factory.createCANTalon(32);
