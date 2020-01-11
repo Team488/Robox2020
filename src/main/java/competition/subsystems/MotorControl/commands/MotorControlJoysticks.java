@@ -1,5 +1,6 @@
 package competition.subsystems.motorcontrol.commands;
 
+import com.google.inject.Inject;
 
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.motorcontrol.MotorControl21SubSystem;
@@ -21,6 +22,7 @@ public class MotorControlJoysticks extends BaseCommand
 
     final OperatorInterface oi;
 
+    @Inject
     public MotorControlJoysticks(OperatorInterface oi,
                                 MotorControl21SubSystem motor21,
                                 MotorControl22SubSystem motor22, 
