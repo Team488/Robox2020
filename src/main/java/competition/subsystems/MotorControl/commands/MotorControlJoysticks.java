@@ -1,10 +1,10 @@
-package competition.subsystems.MotorControl.commands;
+package competition.subsystems.motorcontrol.commands;
 
 import com.google.inject.Inject;
 
 import competition.operator_interface.OperatorInterface;
-import competition.subsystems.MotorControl.MotorControl21SubSystem;
-import competition.subsystems.MotorControl.MotorControl22SubSystem;
+import competition.subsystems.motorcontrol.MotorControl21SubSystem;
+import competition.subsystems.motorcontrol.MotorControl22SubSystem;
 import xbot.common.command.BaseCommand;
 
 public class MotorControlJoysticks extends BaseCommand
