@@ -16,7 +16,7 @@ public class MotorControlJoysticks extends BaseCommand
     public MotorControlJoysticks(OperatorInterface oi,
                                  Mor)
     {
-        //s
+        //w
     }
 
     @Override
