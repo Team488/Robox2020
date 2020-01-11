@@ -5,29 +5,55 @@ import com.google.inject.Inject;
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.MotorControl.MotorControl21SubSystem;
 import competition.subsystems.MotorControl.MotorControl22SubSystem;
+import competition.subsystems.MotorControl.MotorControl23SubSystem;
+import competition.subsystems.MotorControl.MotorControl32SubSystem;
+import competition.subsystems.MotorControl.MotorControl33SubSystem;
+import competition.subsystems.MotorControl.MotorControl34SubSystem;
 import xbot.common.command.BaseCommand;
 
 public class MotorControlJoysticks extends BaseCommand
 {
     final MotorControl21SubSystem motor21;
     final MotorControl22SubSystem motor22;
+    final MotorControl23SubSystem motor23;
+    final MotorControl34SubSystem motor34;
+    final MotorControl33SubSystem motor33;
+    final MotorControl32SubSystem motor32;
+
     final OperatorInterface oi;
 
-    public MotorControlJoysticks(OperatorInterface oi,
-                                 Mor)
+    public MotorControlJoysticks(OperatorInterface oi, MotorControl21SubSystem motor21, MotorControl22SubSystem motor22, MotorControl23SubSystem motor23, MotorControl32SubSystem motor32, MotorControl33SubSystem motor33, MotorControl34SubSystem motor34)
     {
-        
+        this.oi = oi;
+        this.motor21 = motor21;
+        this.motor22 = motor22;
+        this.motor23 = motor23;
+        this.motor32 = motor32;
+        this.motor33 = motor33;
+        this.motor34 = motor34;
+        this.requires(this.motor21);
+        this.requires(this.motor22);
+        this.requires(this.motor23);
+        this.requires(this.motor32);
+        this.requires(this.motor33);
+        this.requires(this.motor34);
     }
 
     @Override
     public void initialize() {
         // TODO Auto-generated method stub
-
+        log.info("Initializing");
     }
 
     @Override
     public void execute() {
         // TODO Auto-generated method stub
+        motor21.setMotor1Power(oi.gamepad.getLeftVector().y);
+        motor22.setMotor1Power(oi.gamepad.getLeftVector().y);
+        motor23.setMotor1Power(oi.gamepad.getRightVector().y);
+        motor32.setMotor1Power(oi.gamepad.getRightVector().y);
+        motor33.setMotor1Power(oi.gamepad.getLeftVector().x);
+        motor34.setMotor1Power(oi.gamepad.getLeftVector().x);
 
     }
     
