@@ -22,7 +22,14 @@ public class MotorControlJoysticks extends BaseCommand
 
     final OperatorInterface oi;
 
-    public MotorControlJoysticks(OperatorInterface oi, MotorControl21SubSystem motor21, MotorControl22SubSystem motor22, MotorControl23SubSystem motor23, MotorControl32SubSystem motor32, MotorControl33SubSystem motor33, MotorControl34SubSystem motor34)
+    @Inject
+    public MotorControlJoysticks(OperatorInterface oi,
+                                MotorControl21SubSystem motor21,
+                                MotorControl22SubSystem motor22, 
+                                MotorControl23SubSystem motor23, 
+                                MotorControl32SubSystem motor32, 
+                                MotorControl33SubSystem motor33, 
+                                MotorControl34SubSystem motor34)
     {
         this.oi = oi;
         this.motor21 = motor21;
@@ -41,13 +48,11 @@ public class MotorControlJoysticks extends BaseCommand
 
     @Override
     public void initialize() {
-        // TODO Auto-generated method stub
         log.info("Initializing");
     }
 
     @Override
     public void execute() {
-        // TODO Auto-generated method stub
         motor21.setMotor1Power(oi.gamepad.getLeftVector().y);
         motor22.setMotor1Power(oi.gamepad.getLeftVector().y);
         motor23.setMotor1Power(oi.gamepad.getRightVector().y);
