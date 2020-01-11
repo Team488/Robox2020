@@ -1,6 +1,5 @@
 package competition.subsystems.motorcontrol.commands;
 
-import com.google.inject.Inject;
 
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.motorcontrol.MotorControl21SubSystem;
