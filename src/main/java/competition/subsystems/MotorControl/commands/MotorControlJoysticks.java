@@ -3,12 +3,12 @@ package competition.subsystems.motorcontrol.commands;
 import com.google.inject.Inject;
 
 import competition.operator_interface.OperatorInterface;
-import competition.subsystems.MotorControl.MotorControl21SubSystem;
-import competition.subsystems.MotorControl.MotorControl22SubSystem;
-import competition.subsystems.MotorControl.MotorControl23SubSystem;
-import competition.subsystems.MotorControl.MotorControl32SubSystem;
-import competition.subsystems.MotorControl.MotorControl33SubSystem;
-import competition.subsystems.MotorControl.MotorControl34SubSystem;
+import competition.subsystems.motorcontrol.MotorControl21SubSystem;
+import competition.subsystems.motorcontrol.MotorControl22SubSystem;
+import competition.subsystems.motorcontrol.MotorControl23SubSystem;
+import competition.subsystems.motorcontrol.MotorControl32SubSystem;
+import competition.subsystems.motorcontrol.MotorControl33SubSystem;
+import competition.subsystems.motorcontrol.MotorControl34SubSystem;
 import xbot.common.command.BaseCommand;
 
 public class MotorControlJoysticks extends BaseCommand
