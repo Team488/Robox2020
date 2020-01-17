@@ -21,9 +21,11 @@ public class IndependentMotorControl extends BaseCommand
     final MotorControl32SubSystem motor32;
 
     final OperatorInterface oi;
+    final OperatorInterface oi2;
 
     @Inject
     public IndependentMotorControl(OperatorInterface oi,
+                                OperatorInterface oi2,
                                 MotorControl21SubSystem motor21,
                                 MotorControl22SubSystem motor22, 
                                 MotorControl23SubSystem motor23, 
@@ -32,6 +34,7 @@ public class IndependentMotorControl extends BaseCommand
                                 MotorControl34SubSystem motor34)
     {
         this.oi = oi;
+        this.oi2 = oi2;
         this.motor21 = motor21;
         this.motor22 = motor22;
         this.motor23 = motor23;
@@ -53,6 +56,10 @@ public class IndependentMotorControl extends BaseCommand
 
     @Override
     public void execute() {
+        motor21.setMotor1Power(oi.gamepad.getLeftVector().y);
+        motor22.setMotor1Power(oi.gamepad.getRightVector().y);
+        motor23.setMotor1Power(oi2.gamepad.getLeftVector().y);
+        motor32.setMotor1Power(oi2.gamepad.getRightVector().y);
         
     }
     
