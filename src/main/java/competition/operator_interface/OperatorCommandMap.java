@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 
 import competition.subsystems.drive.commands.TankDriveWithJoysticksCommand;
 import competition.subsystems.motorcontrol.commands.MotorControlJoysticks;
+import competition.subsystems.motorcontrol.commands.ShooterControlPowerset;
 import xbot.common.subsystems.pose.commands.SetRobotHeadingCommand;
 
 /**
@@ -19,10 +20,12 @@ public class OperatorCommandMap {
             OperatorInterface operatorInterface,
             SetRobotHeadingCommand resetHeading, 
             MotorControlJoysticks joysticks, 
-            TankDriveWithJoysticksCommand tank)
+            TankDriveWithJoysticksCommand tank,
+            ShooterControlPowerset shoot)
     {
         resetHeading.setHeadingToApply(90);
         operatorInterface.gamepad.getifAvailable(1).whenPressed(joysticks);
         operatorInterface.gamepad.getifAvailable(2).whenPressed(tank);
+        operatorInterface.gamepad.getifAvailable(3).whenPressed(shoot);
     }
 }
