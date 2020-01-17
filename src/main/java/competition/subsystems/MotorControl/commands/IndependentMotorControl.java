@@ -57,6 +57,8 @@ public class IndependentMotorControl extends BaseCommand
         motor22.setMotor1Power(oi.gamepad.getRightVector().y);
         motor23.setMotor1Power(oi.Opgamepad.getLeftVector().y);
         motor32.setMotor1Power(oi.Opgamepad.getRightVector().y);
+        motor33.setMotor1Power(0);
+        motor34.setMotor1Power(0);
         
     }
     

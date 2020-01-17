@@ -1,5 +1,7 @@
 package competition.subsystems.motorcontrol.commands;
 
+import com.google.inject.Inject;
+
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.motorcontrol.MotorControl21SubSystem;
 import competition.subsystems.motorcontrol.MotorControl22SubSystem;
@@ -21,6 +23,7 @@ public class ShooterControlPowerset extends BaseCommand
 
     final OperatorInterface oi;
 
+    @Inject
     public ShooterControlPowerset(OperatorInterface oi,
                                 MotorControl21SubSystem motor21,
                                 MotorControl22SubSystem motor22, 
