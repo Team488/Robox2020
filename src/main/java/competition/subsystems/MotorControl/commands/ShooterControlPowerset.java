@@ -1,5 +1,7 @@
 package competition.subsystems.motorcontrol.commands;
 
+import com.google.inject.Inject;
+
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.motorcontrol.MotorControl21SubSystem;
 import competition.subsystems.motorcontrol.MotorControl22SubSystem;
@@ -18,16 +20,17 @@ public class ShooterControlPowerset extends BaseCommand
     final MotorControl34SubSystem motor34;
     final MotorControl33SubSystem motor33;
     final MotorControl32SubSystem motor32;
-
+    boolean cd;
     final OperatorInterface oi;
 
-    public ShooterControlPowerset(OperatorInterface oi,
-                                MotorControl21SubSystem motor21,
-                                MotorControl22SubSystem motor22, 
-                                MotorControl23SubSystem motor23, 
-                                MotorControl32SubSystem motor32, 
-                                MotorControl33SubSystem motor33, 
-                                MotorControl34SubSystem motor34)
+    @Inject
+    public ShooterControlPowerset(  OperatorInterface oi,
+                                    MotorControl21SubSystem motor21,
+                                    MotorControl22SubSystem motor22, 
+                                    MotorControl23SubSystem motor23, 
+                                    MotorControl32SubSystem motor32, 
+                                    MotorControl33SubSystem motor33, 
+                                    MotorControl34SubSystem motor34)
     {
         this.oi = oi;
         this.motor21 = motor21;
@@ -42,6 +45,8 @@ public class ShooterControlPowerset extends BaseCommand
         this.requires(this.motor32);
         this.requires(this.motor33);
         this.requires(this.motor34);
+
+        cd = false;
     }
 
     @Override
@@ -53,16 +58,49 @@ public class ShooterControlPowerset extends BaseCommand
     @Override
     public void execute() {
         
-        double power = oi.gamepad.getLeftVector().y;
-        if(oi.gamepad.getifAvailable(5).get())
+        double power = .5;
+        if(oi.gamepad.getRawWPILibJoystick().getRawButton(5))
         {
             drive(power);
         }
-        else if(oi.gamepad.getifAvailable(6).get())
+        else if(oi.gamepad.getRawWPILibJoystick().getRawButton(6))
         {
-            drive(power);
+            drive(-power);
         }
-        drive(0);
+        else
+        {
+            drive(0);
+        }
+
+
+        if(oi.gamepad.getRawWPILibJoystick().getRawButtonPressed(9) && !cd)
+        {
+            cd = true;
+            if(Math.abs(power) <= 1)
+            {
+                power += -.05;
+                System.out.println(power);
+            }
+        }
+        else if(oi.gamepad.getRawWPILibJoystick().getRawButtonReleased(9) && cd)
+        {
+            cd = false;
+        }
+
+        if(oi.gamepad.getRawWPILibJoystick().getRawButtonPressed(10) && !cd)
+        {
+            cd = true;
+            if(Math.abs(power) <= 1)
+            {
+                power += -.05;
+                System.out.println(power);
+            }
+        }
+        else if(oi.gamepad.getRawWPILibJoystick().getRawButtonReleased(10) && cd)
+        {
+            cd = false;
+        }
+
     }
 
     public void drive(double power)

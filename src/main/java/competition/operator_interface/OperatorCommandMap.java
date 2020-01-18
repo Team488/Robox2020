@@ -27,5 +27,7 @@ public class OperatorCommandMap {
         operatorInterface.gamepad.getifAvailable(1).whenPressed(joysticks);
         operatorInterface.gamepad.getifAvailable(2).whenPressed(tank);
         operatorInterface.gamepad.getifAvailable(3).whenPressed(shoot);
+        
+
     }
 }

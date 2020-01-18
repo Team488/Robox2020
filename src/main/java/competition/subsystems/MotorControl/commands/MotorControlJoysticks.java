@@ -48,7 +48,7 @@ public class MotorControlJoysticks extends BaseCommand
 
     @Override
     public void initialize() {
-        log.info("Initializing");
+        //s
     }
 
     @Override
