@@ -24,6 +24,7 @@ public class NeoControl35 extends BaseSubsystem
         neoMotorEncoder = neoMotorControl.getEncoder();
         neoMotorEncoder.setPosition(0);
         motor35PIDController = neoMotorControl.getPIDController();
+        neoMotorControl.setInverted(false);
     }
     
     public void setMotorPower(double power)

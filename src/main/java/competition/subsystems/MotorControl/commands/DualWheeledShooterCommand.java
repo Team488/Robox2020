@@ -75,8 +75,6 @@ public class DualWheeledShooterCommand extends BaseCommand {
 
     @Override
     public void initialize() {
-
-        neo2.neoMotorControl.setInverted(true);
         initializeParameters();
     }
 

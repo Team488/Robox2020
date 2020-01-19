@@ -21,6 +21,7 @@ public class NeoControl20 extends BaseSubsystem
         neoMotorControl.restoreFactoryDefaults();
         neoMotorEncoder = neoMotorControl.getEncoder();
         neoMotorEncoder.setPosition(0);
+        neoMotorControl.setInverted(false);
     }
     
     public void setMotorPower(double power)
