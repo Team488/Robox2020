@@ -120,7 +120,7 @@ public class DualWheeledShooterCommand extends BaseCommand {
         }
 
         SmartDashboard.putNumber("Encoder35 Position", neo2.neoMotorEncoder.getPosition()); // total rotaions
-        SmartDashboard.putNumber("Encoder35 Velocity", neo2.neoMotorEncoder.getVelocity()); // was rpm now rps
+        SmartDashboard.putNumber("Encoder35 Velocity", neo2.neoMotorEncoder.getVelocity());
 
         SmartDashboard.putNumber("Encoder20 Position", neo1.neoMotorEncoder.getPosition());
         SmartDashboard.putNumber("Encoder20 Velocity", neo1.neoMotorEncoder.getVelocity());
