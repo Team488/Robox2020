@@ -8,6 +8,7 @@ import competition.subsystems.motorcontrol.commands.DualWheeledShooterCommand;
 import competition.subsystems.motorcontrol.commands.MotorControlJoysticks;
 import competition.subsystems.motorcontrol.commands.ShooterControlPowerset;
 import xbot.common.subsystems.pose.commands.SetRobotHeadingCommand;
+import competition.subsystems.motorcontrol.commands.IndependentMotorControl;
 
 /**
  * Maps operator interface buttons to commands
@@ -23,12 +24,15 @@ public class OperatorCommandMap {
             MotorControlJoysticks joysticks, 
             TankDriveWithJoysticksCommand tank,
             ShooterControlPowerset shoot,
-            DualWheeledShooterCommand dualWheelShoot)
+            DualWheeledShooterCommand dualWheelShoot,
+            IndependentMotorControl ind)
     {
         resetHeading.setHeadingToApply(90);
         operatorInterface.gamepad.getifAvailable(1).whenPressed(joysticks);
         operatorInterface.gamepad.getifAvailable(2).whenPressed(tank);
         operatorInterface.gamepad.getifAvailable(3).whenPressed(shoot);
-        operatorInterface.gamepad.getifAvailable(4).whenPressed(dualWheelShoot);
+        operatorInterface.gamepad.getifAvailable(4).whenPressed(ind);
+        operatorInterface.Opgamepad.getifAvailable(1).whenPressed(ind);
+        operatorInterface.Opgamepad.getifAvailable(2).whenPressed(dualWheelShoot);
     }
 }
