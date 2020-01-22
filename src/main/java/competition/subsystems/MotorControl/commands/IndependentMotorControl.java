@@ -11,9 +11,8 @@ import competition.subsystems.motorcontrol.MotorControl33SubSystem;
 import competition.subsystems.motorcontrol.MotorControl34SubSystem;
 import xbot.common.command.BaseCommand;
 
-public class ShooterControlPowerset extends BaseCommand
+public class IndependentMotorControl extends BaseCommand
 {
-
     final MotorControl21SubSystem motor21;
     final MotorControl22SubSystem motor22;
     final MotorControl23SubSystem motor23;
@@ -24,7 +23,7 @@ public class ShooterControlPowerset extends BaseCommand
     final OperatorInterface oi;
 
     @Inject
-    public ShooterControlPowerset(OperatorInterface oi,
+    public IndependentMotorControl(OperatorInterface oi,
                                 MotorControl21SubSystem motor21,
                                 MotorControl22SubSystem motor22, 
                                 MotorControl23SubSystem motor23, 
@@ -50,32 +49,16 @@ public class ShooterControlPowerset extends BaseCommand
     @Override
     public void initialize() {
         log.info("Initializing");
-
     }
 
     @Override
     public void execute() {
-        
-        double power = oi.gamepad.getLeftVector().y;
-        if(oi.gamepad.getifAvailable(5).get())
-        {
-            drive(power);
-        }
-        else if(oi.gamepad.getifAvailable(6).get())
-        {
-            drive(power);
-        }
-        drive(0);
-    }
-
-    public void drive(double power)
-    {
-        motor21.setMotor1Power(power);
-        motor22.setMotor1Power(power);
-        motor23.setMotor1Power(power);
-        motor32.setMotor1Power(-power);
-        motor33.setMotor1Power(-power);
-        motor34.setMotor1Power(-power);
+        motor21.setMotor1Power(oi.gamepad.getLeftVector().y);
+        motor22.setMotor1Power(oi.gamepad.getRightVector().y);
+        motor23.setMotor1Power(oi.Opgamepad.getLeftVector().y);
+        motor32.setMotor1Power(oi.Opgamepad.getRightVector().y);
+        motor33.setMotor1Power(0);
+        motor34.setMotor1Power(0);
     }
     
 }
