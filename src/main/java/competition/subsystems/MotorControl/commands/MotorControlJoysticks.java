@@ -38,17 +38,17 @@ public class MotorControlJoysticks extends BaseCommand
         this.motor32 = motor32;
         this.motor33 = motor33;
         this.motor34 = motor34;
-        this.requires(this.motor21);
-        this.requires(this.motor22);
-        this.requires(this.motor23);
-        this.requires(this.motor32);
-        this.requires(this.motor33);
-        this.requires(this.motor34);
+        this.addRequirements(this.motor21);
+        this.addRequirements(this.motor22);
+        this.addRequirements(this.motor23);
+        this.addRequirements(this.motor32);
+        this.addRequirements(this.motor33);
+        this.addRequirements(this.motor34);
     }
 
     @Override
     public void initialize() {
-        log.info("Initializing");
+        //s
     }
 
     @Override
