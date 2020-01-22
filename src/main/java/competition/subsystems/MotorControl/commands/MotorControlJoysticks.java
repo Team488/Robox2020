@@ -59,7 +59,6 @@ public class MotorControlJoysticks extends BaseCommand
         motor32.setMotor1Power(oi.gamepad.getRightVector().y);
         motor33.setMotor1Power(oi.gamepad.getLeftVector().x);
         motor34.setMotor1Power(oi.gamepad.getLeftVector().x);
-
     }
     
 }
