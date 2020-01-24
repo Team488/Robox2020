@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 
 import competition.subsystems.drive.commands.TankDriveWithJoysticksCommand;
 import competition.subsystems.motorcontrol.commands.DualWheeledShooterCommand;
+import competition.subsystems.motorcontrol.commands.DualWheeledShooterCommandWControl;
 import competition.subsystems.motorcontrol.commands.MotorControlJoysticks;
 import competition.subsystems.motorcontrol.commands.ShooterControlPowerset;
 import xbot.common.subsystems.pose.commands.SetRobotHeadingCommand;
@@ -25,14 +26,15 @@ public class OperatorCommandMap {
             TankDriveWithJoysticksCommand tank,
             ShooterControlPowerset shoot,
             DualWheeledShooterCommand dualWheelShoot,
-            IndependentMotorControl ind)
+            IndependentMotorControl ind,
+            DualWheeledShooterCommandWControl dualWheelShootWControl)
     {
         resetHeading.setHeadingToApply(90);
-        operatorInterface.gamepad.getifAvailable(1).whenPressed(joysticks);
-        operatorInterface.gamepad.getifAvailable(2).whenPressed(tank);
-        operatorInterface.gamepad.getifAvailable(3).whenPressed(shoot);
-        operatorInterface.gamepad.getifAvailable(4).whenPressed(ind);
-        operatorInterface.Opgamepad.getifAvailable(1).whenPressed(ind);
-        operatorInterface.Opgamepad.getifAvailable(2).whenPressed(dualWheelShoot);
+        // operatorInterface.gamepad.getifAvailable(1).whenPressed(joysticks);
+        // operatorInterface.gamepad.getifAvailable(2).whenPressed(tank);
+        // operatorInterface.gamepad.getifAvailable(3).whenPressed(shoot);
+        // operatorInterface.gamepad.getifAvailable(4).whenPressed(ind);
+        operatorInterface.gamepad.getifAvailable(1).whenPressed(dualWheelShootWControl);
+        operatorInterface.gamepad.getifAvailable(4).whenPressed(dualWheelShoot);
     }
 }
