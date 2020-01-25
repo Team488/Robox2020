@@ -4,9 +4,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import competition.subsystems.drive.commands.TankDriveWithJoysticksCommand;
-import competition.subsystems.motorcontrol.commands.DualWheeledShooterCommand;
 import competition.subsystems.motorcontrol.commands.IndependentMotorControl;
 import competition.subsystems.motorcontrol.commands.MotorControlJoysticks;
+import competition.subsystems.neo.DualNeoSubsystem;
+import competition.subsystems.neo.SingleWheelSpeedControlCommand;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import xbot.common.subsystems.pose.commands.SetRobotHeadingCommand;
 
 /**
@@ -22,7 +26,6 @@ public class OperatorCommandMap {
             SetRobotHeadingCommand resetHeading, 
             MotorControlJoysticks joysticks, 
             TankDriveWithJoysticksCommand tank,
-            DualWheeledShooterCommand dualWheelShoot,
             IndependentMotorControl ind)
             //DualWheeledShooterCommandWControl dualWheelShootWControl)
     {
@@ -33,5 +36,20 @@ public class OperatorCommandMap {
         // operatorInterface.gamepad.getifAvailable(4).whenPressed(ind);
         //operatorInterface.gamepad.getifAvailable(1).whenPressed(dualWheelShootWControl);
         //operatorInterface.gamepad.getifAvailable(4).whenPressed(dualWheelShoot);
+    }
+
+    @Inject
+    public void setupShootercommands(
+        OperatorInterface operatorInterface,
+        DualNeoSubsystem shooter,
+        SingleWheelSpeedControlCommand singleWheel) {
+            Command speedUp = new InstantCommand(() -> shooter.changeTargetSpeed(100));
+            Command slowDown = new InstantCommand(() -> shooter.changeTargetSpeed(-100));
+            Command stop = new RunCommand(() -> shooter.stop(), shooter);
+
+            operatorInterface.gamepad.getifAvailable(1).whenPressed(singleWheel);
+            operatorInterface.gamepad.getifAvailable(2).whenPressed(stop);
+            operatorInterface.gamepad.getifAvailable(5).whenPressed(speedUp);
+            operatorInterface.gamepad.getifAvailable(6).whenPressed(slowDown);
     }
 }
