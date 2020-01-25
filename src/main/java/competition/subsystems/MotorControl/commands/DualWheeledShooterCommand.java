@@ -1,7 +1,6 @@
 package competition.subsystems.motorcontrol.commands;
 
 import com.google.inject.Inject;
-import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
 
 import competition.subsystems.motorcontrol.NeoControl20;
@@ -14,9 +13,6 @@ public class DualWheeledShooterCommand extends BaseCommand {
 
     NeoControl20 neo1;
     NeoControl35 neo2;
-
-    final CANPIDController neo1PID;
-    final CANPIDController neo2PID;
 
     double kP;
     double kI;
@@ -31,9 +27,6 @@ public class DualWheeledShooterCommand extends BaseCommand {
     public DualWheeledShooterCommand(NeoControl20 neo1, NeoControl35 neo2, PropertyFactory pf) {
         this.neo1 = neo1;
         this.neo2 = neo2;
-
-        neo1PID = neo1.neoMotorControl.getPIDController();
-        neo2PID = neo2.neoMotorControl.getPIDController();
     }
 
     private void initializeParameters() {
@@ -47,19 +40,19 @@ public class DualWheeledShooterCommand extends BaseCommand {
         maxRPM = 5700;
 
         // set PID coefficients
-        neo1PID.setP(kP);
-        neo1PID.setI(kI);
-        neo1PID.setD(kD);
-        neo1PID.setIZone(kIz);
-        neo1PID.setFF(kFF);
-        neo1PID.setOutputRange(kMinOutput, kMaxOutput);
+        neo1.neoMotorControl.setP(kP);
+        neo1.neoMotorControl.setI(kI);
+        neo1.neoMotorControl.setD(kD);
+        neo1.neoMotorControl.setIZone(kIz);
+        neo1.neoMotorControl.setFF(kFF);
+        neo1.neoMotorControl.setOutputRange(kMinOutput, kMaxOutput);
 
-        neo2PID.setP(kP);
-        neo2PID.setI(kI);
-        neo2PID.setD(kD);
-        neo2PID.setIZone(kIz);
-        neo2PID.setFF(kFF);
-        neo2PID.setOutputRange(kMinOutput, kMaxOutput);
+        neo2.neoMotorControl.setP(kP);
+        neo2.neoMotorControl.setI(kI);
+        neo2.neoMotorControl.setD(kD);
+        neo2.neoMotorControl.setIZone(kIz);
+        neo2.neoMotorControl.setFF(kFF);
+        neo2.neoMotorControl.setOutputRange(kMinOutput, kMaxOutput);
 
         SmartDashboard.putNumber("P Gain", kP);
         SmartDashboard.putNumber("I Gain", kI);
@@ -88,50 +81,50 @@ public class DualWheeledShooterCommand extends BaseCommand {
         double min = SmartDashboard.getNumber("Min Output", 0);
 
         if ((p != kP)) {
-            neo1PID.setP(p);
-            neo2PID.setP(p);
+            neo1.neoMotorControl.setP(p);
+            neo2.neoMotorControl.setP(p);
             kP = p;
         }
         if ((i != kI)) {
-            neo1PID.setI(i);
-            neo2PID.setP(p);
+            neo1.neoMotorControl.setI(i);
+            neo2.neoMotorControl.setP(p);
             kI = i;
         }
         if ((d != kD)) {
-            neo1PID.setD(d);
-            neo2PID.setP(p);
+            neo1.neoMotorControl.setD(d);
+            neo2.neoMotorControl.setP(p);
             kD = d;
         }
         if ((iz != kIz)) {
-            neo1PID.setIZone(iz);
-            neo2PID.setP(p);
+            neo1.neoMotorControl.setIZone(iz);
+            neo2.neoMotorControl.setP(p);
             kIz = iz;
         }
         if ((ff != kFF)) {
-            neo1PID.setFF(ff);
-            neo2PID.setP(p);
+            neo1.neoMotorControl.setFF(ff);
+            neo2.neoMotorControl.setP(p);
             kFF = ff;
         }
         if ((max != kMaxOutput) || (min != kMinOutput)) {
-            neo1PID.setOutputRange(min, max);
-            neo2PID.setP(p);
+            neo1.neoMotorControl.setOutputRange(min, max);
+            neo2.neoMotorControl.setP(p);
             kMinOutput = min;
             kMaxOutput = max;
         }
 
-        SmartDashboard.putNumber("Encoder35 Position", neo2.neoMotorEncoder.getPosition()); // total rotaions
-        SmartDashboard.putNumber("Encoder35 Velocity", neo2.neoMotorEncoder.getVelocity());
+        SmartDashboard.putNumber("Encoder35 Position", neo2.neoMotorControl.getPosition()); // total rotaions
+        SmartDashboard.putNumber("Encoder35 Velocity", neo2.neoMotorControl.getVelocity());
 
-        SmartDashboard.putNumber("Encoder20 Position", neo1.neoMotorEncoder.getPosition());
-        SmartDashboard.putNumber("Encoder20 Velocity", neo1.neoMotorEncoder.getVelocity());
+        SmartDashboard.putNumber("Encoder20 Position", neo1.neoMotorControl.getPosition());
+        SmartDashboard.putNumber("Encoder20 Velocity", neo1.neoMotorControl.getVelocity());
     }
 
     @Override
     public void execute() {
         updateParameters();
 
-        neo1PID.setReference(SmartDashboard.getNumber("TargetRPM-1", 0), ControlType.kVelocity);
-        neo2PID.setReference(SmartDashboard.getNumber("TargetRPM-2", 0), ControlType.kVelocity);
+        neo1.neoMotorControl.setReference(SmartDashboard.getNumber("TargetRPM-1", 0), ControlType.kVelocity);
+        neo2.neoMotorControl.setReference(SmartDashboard.getNumber("TargetRPM-2", 0), ControlType.kVelocity);
     }
 
 }

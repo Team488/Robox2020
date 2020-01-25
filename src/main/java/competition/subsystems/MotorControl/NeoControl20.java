@@ -1,26 +1,23 @@
 package competition.subsystems.motorcontrol;
 
-import xbot.common.command.BaseSubsystem;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import xbot.common.command.BaseSubsystem;
+import xbot.common.controls.actuators.XCANSparkMax;
+import xbot.common.injection.wpi_factories.CommonLibFactory;
 
 @Singleton
 public class NeoControl20 extends BaseSubsystem
 {
-    public final CANSparkMax neoMotorControl;
-    public final CANEncoder neoMotorEncoder;
+    public final XCANSparkMax neoMotorControl;
 
     @Inject
-    public NeoControl20()
+    public NeoControl20(CommonLibFactory clf)
     {
-        neoMotorControl = new CANSparkMax(20, MotorType.kBrushless);
+        neoMotorControl = clf.createCANSparkMax(20, "NeoControl20", "Main");
         neoMotorControl.restoreFactoryDefaults();
-        neoMotorEncoder = neoMotorControl.getEncoder();
-        neoMotorEncoder.setPosition(0);
+        neoMotorControl.setPosition(0);
         neoMotorControl.setInverted(false);
     }
     
