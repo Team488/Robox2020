@@ -14,7 +14,7 @@ import xbot.common.properties.PropertyFactory;
 public class DualNeoSubsystem extends BaseSubsystem {
 
     XCANSparkMax leader;
-    //XCANSparkMax follower;
+    XCANSparkMax follower;
     
     final DoubleProperty targetRpmProp;
     final DoubleProperty currentRpmProp;
@@ -23,8 +23,8 @@ public class DualNeoSubsystem extends BaseSubsystem {
     public DualNeoSubsystem(CommonLibFactory clf, PropertyFactory pf) {
 
         leader = clf.createCANSparkMax(20, this.getPrefix(), "Leader");
-        //follower= clf.createCANSparkMax(35, this.getPrefix(), "Follower");
-        //follower.foll
+        follower= clf.createCANSparkMax(35, this.getPrefix(), "Follower");
+        follower.follow(leader, true);
         pf.setPrefix(this);
 
         targetRpmProp = pf.createEphemeralProperty("TargetRPM", 0);
